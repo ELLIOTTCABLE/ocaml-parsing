@@ -9,19 +9,19 @@
 ;; generate lexer -- temporary hack while ppx_sedlex and ppx_import are incompatible with jbuilder!!
 (rule
  ((targets (Lexer.sedlex.ml))
-  (deps    (Lexer.cppo.sedlex.ml Tokens.ml))
+  (deps    (Lexer.sedlex.body.ml Tokens.ml))
   (action  (with-stdout-to Lexer.sedlex.ml
     (progn (cat Tokens.ml)
            (echo "  [@@deriving show, enumerate]")
-           (cat Lexer.cppo.sedlex.ml))))))
+           (cat Lexer.sedlex.body.ml))))))
 
 (rule
  ((targets (Lexer.mli))
-  (deps    (Lexer.cppo.mli Tokens.ml))
+  (deps    (Lexer.body.mli Tokens.ml))
   (action  (with-stdout-to Lexer.mli
     (progn (cat Tokens.ml)
            (echo "  [@@deriving show, enumerate]")
-           (cat Lexer.cppo.mli))))))
+           (cat Lexer.body.mli))))))
 
 (rule
  ((targets (Lexer.ml))
@@ -43,7 +43,7 @@
      compiler-libs.common
      menhirLib)
   )
-  (virtual_deps (cppo menhir))
+  (virtual_deps (menhir))
   (preprocess (pps (ppx_deriving.std ppx_enumerate)))
  )
 )
