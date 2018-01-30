@@ -20,7 +20,6 @@
   (deps    (Lexer.sedlex.ml))
   (action  (run ${lib:sedlex:ppx_sedlex} ${<} -o ${@}))))
 
-
 ;; generate parser
 (menhir
  ((modules (Menhir_parser))
@@ -30,7 +29,7 @@
  ((name        ocaml_parsing)
   (public_name ocaml_parsing)
   (wrapped true)
-  (libraries 
+  (libraries
     (core
      sedlex
      compiler-libs.common
