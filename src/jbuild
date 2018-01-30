@@ -10,11 +10,19 @@
 (rule
  ((targets (Lexer.sedlex.ml))
   (deps    (Lexer.cppo.sedlex.ml Tokens.ml))
-  (action  (run ${bin:cppo} ${<} -n -o ${@}))))
+  (action  (with-stdout-to Lexer.sedlex.ml
+    (progn (cat Tokens.ml)
+           (echo "  [@@deriving show, enumerate]")
+           (cat Lexer.cppo.sedlex.ml))))))
+
 (rule
  ((targets (Lexer.mli))
   (deps    (Lexer.cppo.mli Tokens.ml))
-  (action  (run ${bin:cppo} ${<} -n -o ${@}))))
+  (action  (with-stdout-to Lexer.mli
+    (progn (cat Tokens.ml)
+           (echo "  [@@deriving show, enumerate]")
+           (cat Lexer.cppo.mli))))))
+
 (rule
  ((targets (Lexer.ml))
   (deps    (Lexer.sedlex.ml))

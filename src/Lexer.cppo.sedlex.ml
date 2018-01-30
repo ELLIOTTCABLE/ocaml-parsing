@@ -1,5 +1,5 @@
-#include "Tokens.ml"
-  [@@deriving show, enumerate]
+(* #include "Tokens.ml"
+ *   [@@deriving show, enumerate] *)
 
 (* use custom lexbuffer to keep track of source location *)
 module Sedlexing = LexBuffer
@@ -60,7 +60,7 @@ let rec garbage buf =
 and comment depth buf =
   if depth = 0 then garbage buf else
   match%sedlex buf with
-  | eof -> failwith buf "Unterminated comment at EOF" 
+  | eof -> failwith buf "Unterminated comment at EOF"
   | "(*" -> comment (depth + 1) buf
   | "*)" -> comment (depth - 1) buf
   | any -> comment depth buf
