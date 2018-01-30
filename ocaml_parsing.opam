@@ -14,8 +14,7 @@ build-test: ["jbuilder" "runtest" "-p" name "-j" jobs]
 install: ["jbuilder" "install" "-p" name "-j" jobs]
 
 depends: [
-  "jbuilder" {>="1.0+beta13"}
-  "cppo"
+  "jbuilder" {>="1.0+beta17"}
   "odoc"
   "menhir"
   #########################
